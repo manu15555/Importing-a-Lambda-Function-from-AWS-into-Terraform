@@ -5,7 +5,7 @@ import {
 
 import {
   to = aws_iam_policy.lambda_execution_role
-  id = "arn:aws:iam::248563009905:policy/service-role/AWSLambdaBasicExecutionRole-0f5b07c1-8758-490a-a8c7-b2a17516d2b4"
+  id = "arn:aws:iam::*accountid*:policy/service-role/AWSLambdaBasicExecutionRole-0f5b07c1-8758-490a-a8c7-b2a17516d2b4"
 }
 
 data "aws_iam_policy_document" "assume_lambda_execution_role" {
