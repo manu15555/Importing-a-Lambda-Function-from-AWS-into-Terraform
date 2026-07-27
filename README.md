@@ -1,7 +1,7 @@
 Importing an AWS Lambda Function into Terraform
 ## Objective
 
-This project demonstrates how to import an existing AWS Lambda function (originally created manually in the AWS Console) into Terraform using the import block. The scope includes the Lambda’s source code, its execution role, the IAM policy attached to that role, and the CloudWatch Log Group. By codifying these resources, the project transitions from manual AWS setup to fully managed Infrastructure as Code (IaC).
+This project demonstrates how to import an existing AWS Lambda function (originally created manually in the AWS Console) into Terraform using the import block. The scope includes the Lambda’s source code, its execution role, the IAM policy attached to that role, and the CloudWatch Log Group. By codifying these resources, the project transitions from manual AWS setup to fully managed Infrastructure as Code (IaC). Please note that our state file is being managed locally instead of using a remote backend such as Terraform Cloud or an S3 bucket to keep things simple.
 ### Skills Learned
 
 - Terraform imports: Migrating existing AWS resources into Terraform state.
