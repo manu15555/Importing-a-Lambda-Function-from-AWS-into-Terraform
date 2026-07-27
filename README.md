@@ -9,9 +9,9 @@ This project demonstrates how to import an existing AWS Lambda function (origina
 
 - CloudWatch integration: Managing log groups for Lambda functions.
 
-- Archive packaging: Bundling Lambda source code into reproducible zip files.
+- Archive packaging: Bundling Lambda source code into zip files.
 
-- Best practices: Using default tags for resource tracking and governance.
+- Best practices: Using default tags for resource tracking and governance. Additionally, we replace hardcoded values with dynamic references, migrate IAM policy statements into policy documents, and manage resources consistently through imports and data sources to ensure best practices and maintain consistency.
 
 - Critical thinking in IaC: Detecting and resolving drift between imported resources and Terraform definitions.
 
@@ -31,7 +31,7 @@ This project demonstrates how to import an existing AWS Lambda function (origina
 
 - Archive File: To package Lambda source code into a zip file.
 
-- AWS Provider: Configured for us-east-2 region with default tags.
+- AWS Provider: Configured for us-east-2 region with default tags. We later configured the archive provider to package the Lambda function code into a zip file.
 
 - Run Terraform workflow:
 
