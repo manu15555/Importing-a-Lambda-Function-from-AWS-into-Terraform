@@ -174,17 +174,76 @@ Basically, we are copying the contents of this policy. What we are doing is allo
 
 
 <img width="723" height="71" alt="40" src="https://github.com/user-attachments/assets/cc97ddba-5319-4ef8-968c-55714d1a5857" />
+
+We replace the value of the assume_role_policy using the data source (iam_policy_document) to avoid harcoding values, as mentioned earlier.
+
 <img width="1636" height="546" alt="41, greenshot" src="https://github.com/user-attachments/assets/52544eef-2c3d-4701-9d2b-1efbe8517ecb" />
+
+id= arn of our execution role.
+
 <img width="1014" height="90" alt="42, greenshot" src="https://github.com/user-attachments/assets/4d851a10-360f-479d-bb87-4a28d84b4c42" />
 <img width="837" height="492" alt="43, greenshot" src="https://github.com/user-attachments/assets/4fc6464c-09a2-4a05-9e5d-a3a874a99192" />
 <img width="739" height="200" alt="44" src="https://github.com/user-attachments/assets/6ef6679d-3652-4f3a-9eb0-9551cc025d81" />
 
 
+We generated a generated.tf file one more time, defined the Lambda execution role with a trust policy that allows AWS Lambda to assume it, and attached the imported IAM policy (AWSLambdaBasicExecutionRole) to the role, granting permissions to write logs in CloudWatch. 
+
 
 
 - 6: Refactor the Imported Policy with data.aws_iam_policy_document to define CloudWatch logging permissions.
 
+We now migrate the statements defined in the IAM policy into a data source and deleted principals since we only need to know under which resources we can create the log group.
+
+<img width="439" height="87" alt="45" src="https://github.com/user-attachments/assets/461ac489-9e3d-431c-b554-30bca93d9fd2" />
+<img width="382" height="84" alt="46" src="https://github.com/user-attachments/assets/3dc2b936-0e8c-4388-be21-94499c4d40dc" />
+
+To avoid hardcoding, it is considered best practice to reference values through data sources. In this case, we use data sources to retrieve our region and caller identity, specifically the account ID.
+
+
+<img width="566" height="23" alt="47, greenshot" src="https://github.com/user-attachments/assets/6a6aa31b-bf76-4e7e-8306-b4ea5b6be5f0" />
+<img width="1092" height="35" alt="48" src="https://github.com/user-attachments/assets/066f1253-aa12-445c-bb94-ce4517de0abe" />
+<img width="1568" height="941" alt="49, greenshot" src="https://github.com/user-attachments/assets/d0af5a36-e701-4948-9246-bff312061d5e" />
+
+
+We now fully migrate our policy into an IAM policy document. The value in the second statement remains hardcoded, since we have not yet imported our log group. Running terraform plan shows no changes, as we are only migrating definitions within Terraform to align with best practices and maintain consistency.
+
+
 - 7: Import the Log Group (aws_cloudwatch_log_group.lambda) for Lambda logs.
 
+
+The CloudWatch log group serves as the destination for all logs produced by the Lambda function. In this case, it contains the output from the initial execution of our Lambda. It is worth mentioning that this belongs to the CloudWatch service.
+
+
+<img width="1919" height="914" alt="50, greenshot" src="https://github.com/user-attachments/assets/2372e5a6-2e79-4f25-b82e-6d30c4568dd5" />
+
+Since we want to manage this resource directly from our Terraform project and code, we use the import block. If we only wanted to fetch its information, we would use data sources instead.
+
+
+<img width="1656" height="494" alt="51, greenshot" src="https://github.com/user-attachments/assets/9bd8e4bc-d6c7-45c4-b2fa-456ea24f5dd2" />
+<img width="835" height="350" alt="52" src="https://github.com/user-attachments/assets/e82ed381-f043-4150-a14d-a01f99ed90e4" />
+
+
+We are deleting code fragments that contain null, 0, or false values. If these attributes had actual values, we would import them into our Terraform project to manage them directly from there
+
+<img width="750" height="203" alt="53" src="https://github.com/user-attachments/assets/816e9853-65ac-40ce-919c-1da43ea8094f" />
+
+As we can see, the values we mentioned earlier (0, null and false) remain in our state file when we run terraform plan.
+
+<img width="839" height="182" alt="54" src="https://github.com/user-attachments/assets/f6130694-8246-4d70-8b22-3bc521f7d7d8" />
+
+
+And finally, we replace the hardcoded value in the second statement of the IAM policy document with a dynamic reference to the log group.
+
+
+<img width="700" height="162" alt="55" src="https://github.com/user-attachments/assets/942d5375-f8d5-47ee-8260-4a468b7c8c7f" />
+
+
+
 - 8: Add default tags in the provider block (ManagedBy=Terraform, Project=Project03-import-lambda) to enforce best practices.
+
+<img width="483" height="186" alt="56" src="https://github.com/user-attachments/assets/34737fc4-a130-4c11-ad59-ea82d5e459a9" />
+
+
+<img width="1573" height="411" alt="57" src="https://github.com/user-attachments/assets/3dc2c01f-707d-431d-b468-6bb7aafea24d" />
+
 
