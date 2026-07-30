@@ -43,7 +43,7 @@ This project demonstrates how to import an existing AWS Lambda function (origina
 
 ## Steps
 
-<img width="1536" height="1024" alt="lambda" src="https://github.com/user-attachments/assets/74fa5a21-ac91-4195-b83f-c365dd760326" />
+<img width="1536" height="1024" alt="wpppppp" src="https://github.com/user-attachments/assets/1046e70d-265f-4e76-9ed8-91f345e51cc0" />
 
 
 - 1: Create the Lambda Function manually in the AWS Console.
