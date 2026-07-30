@@ -42,6 +42,10 @@ This project demonstrates how to import an existing AWS Lambda function (origina
 --terraform apply: manage Lambda, IAM, and CloudWatch resources fully through Terraform.
 
 ## Steps
+
+<img width="1536" height="1024" alt="lambda" src="https://github.com/user-attachments/assets/74fa5a21-ac91-4195-b83f-c365dd760326" />
+
+
 - 1: Create the Lambda Function manually in the AWS Console.
 
  <img width="1904" height="866" alt="1" src="https://github.com/user-attachments/assets/62157f65-a6ec-47d1-b5ca-7ddae91efec5" />
